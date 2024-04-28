@@ -5,8 +5,8 @@ Resources:
   function:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: target/java17-examples-1.0-SNAPSHOT.jar
-      Handler: example.HandlerIntegerJava17
+      CodeUri:
+      Handler: com.intellioreo.lambda.handler.Handler
       Runtime: java17
       Description: Java function
       MemorySize: 2048
@@ -15,7 +15,7 @@ Resources:
         HttpRequest:
           Type: Api
           Properties:
-            Path: /documents
+            Path: /api
             Method: get
       # Function's execution role
       Policies:

@@ -1,6 +1,7 @@
 package com.intellioreo.lambda.handler;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,7 @@ class InvokeTest {
         var event = 10;
         Context context = new TestContext();
         Handler handler = new Handler();
-        assertNull(handler.handleRequest(List.of(event), context));
+        assertNotNull(handler.handleRequest(List.of(event), context));
     }
 
 }

@@ -3,15 +3,19 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.intellioreo.lambda.service.DynamoDBService;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
+
+import java.net.URI;
 import java.util.List;
 public class Handler implements RequestHandler<List<Integer>, Integer>{
 
-    DynamoDbClient dynamoDbClient = DynamoDbClient.builder()
-            .build(); // Customize the builder as necessary, e.g., setting the region
+    DynamoDBService dynamoDBService = new DynamoDBService();
 
-    DynamoDBService dynamoDBService = new DynamoDBService(dynamoDbClient);
+
     @Override
     /*
      * Takes a list of Integers and returns its sum.
@@ -20,6 +24,7 @@ public class Handler implements RequestHandler<List<Integer>, Integer>{
     {
         LambdaLogger logger = context.getLogger();
         logger.log("EVENT TYPE: " + event.getClass().toString());
+        //dynamoDBService.putItem("IngredientName");
         return event.stream().mapToInt(Integer::intValue).sum();
     }
 }
